@@ -2,70 +2,68 @@
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>SRIJA COMMUNICATION</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,"Noto Sans Bengali",sans-serif}
-body{background:#f5f7fb;color:#222}
-header{background:linear-gradient(135deg,#075e54,#128c7e);color:#fff;text-align:center;padding:28px 20px}
-header h1{font-size:30px;margin-bottom:6px}
-nav{background:#fff;padding:14px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);position:sticky;top:0;z-index:10}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f4f7fb;color:#222}
+header{background:linear-gradient(135deg,#075e54,#128c7e);color:white;text-align:center;padding:28px 16px}
+header h1{margin:0 0 6px;font-size:30px}header p{margin:0}
+nav{position:sticky;top:0;z-index:10;background:#fff;padding:13px;text-align:center;box-shadow:0 2px 8px #0001}
 nav a{color:#075e54;text-decoration:none;font-weight:bold;margin:0 10px}
-.hero{text-align:center;padding:60px 20px;background:#fff}
-.hero h2{font-size:30px;color:#075e54;margin-bottom:15px}
-.hero p{font-size:18px;line-height:1.7;max-width:700px;margin:auto}
-.btn{display:inline-block;margin-top:25px;padding:13px 25px;background:#075e54;color:#fff;text-decoration:none;border-radius:8px;font-weight:bold}
-.section{padding:45px 20px;max-width:1100px;margin:auto}
-.section h2{text-align:center;color:#075e54;margin-bottom:30px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{background:#fff;padding:25px;border-radius:12px;text-align:center;box-shadow:0 3px 12px rgba(0,0,0,.08)}
-.icon{font-size:40px;margin-bottom:12px}
-.card h3{color:#075e54;margin-bottom:10px}
-.contact{background:#075e54;color:#fff;text-align:center;padding:45px 20px}
-.contact h2{margin-bottom:20px}
-.contact p{margin:9px 0;font-size:17px}
-footer{background:#063f39;color:#fff;text-align:center;padding:18px;font-size:14px}
-@media(max-width:600px){header h1{font-size:25px}.hero h2{font-size:25px}nav a{margin:0 5px;font-size:14px}}
+.notice{background:#fff3cd;color:#664d03;padding:10px;text-align:center;white-space:nowrap;overflow:hidden}
+.notice span{display:inline-block;animation:move 18s linear infinite}@keyframes move{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+.hero{text-align:center;padding:58px 20px;background:white}.hero h2{color:#075e54;font-size:30px}.hero p{font-size:18px;line-height:1.7;max-width:700px;margin:auto}
+.btn{display:inline-block;margin-top:22px;padding:12px 22px;background:#075e54;color:white;text-decoration:none;border-radius:8px;border:0;cursor:pointer;font-weight:bold}
+.section{padding:42px 20px;max-width:1100px;margin:auto}.section>h2{text-align:center;color:#075e54;margin-bottom:28px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}.card{background:#fff;padding:22px;border-radius:12px;text-align:center;box-shadow:0 3px 12px #00000012}.icon{font-size:38px}.card h3{color:#075e54}
+.contact{background:#075e54;color:white;text-align:center;padding:42px 20px}.contact p{margin:9px}
+footer{background:#063f39;color:#fff;text-align:center;padding:17px;font-size:14px}
+#admin{display:none}.admin-wrap{max-width:900px;margin:30px auto;padding:20px}.panel{background:#fff;padding:22px;border-radius:12px;box-shadow:0 3px 14px #0001;margin-bottom:18px}
+input,textarea{width:100%;padding:11px;margin:7px 0 12px;border:1px solid #ccd5dd;border-radius:7px;font-size:15px}textarea{min-height:90px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.link-row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;margin-bottom:8px}
+.small{font-size:13px;color:#666}.danger{background:#b42318}.logout{float:right;background:#555}
+@media(max-width:650px){nav a{margin:0 5px;font-size:14px}.row,.link-row{grid-template-columns:1fr}.hero h2{font-size:25px}}
 </style>
 </head>
 <body>
-<header>
-<h1>শ্রীজা কমিউনিকেশন</h1>
-<p>SRIJA COMMUNICATION</p>
-</header>
-<nav>
-<a href="#home">হোম</a>
-<a href="#services">পরিষেবা</a>
-<a href="#about">আমাদের সম্পর্কে</a>
-<a href="#contact">যোগাযোগ</a>
-</nav>
-<section class="hero" id="home">
-<h2>স্বাগতম SRIJA COMMUNICATION-এ</h2>
-<p>আপনার বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবার জন্য একটি সহজ এবং নির্ভরযোগ্য ঠিকানা।</p>
-<a href="#services" class="btn">পরিষেবাগুলি দেখুন</a>
-</section>
-<section class="section" id="services">
-<h2>আমাদের পরিষেবা</h2>
-<div class="cards">
-<div class="card"><div class="icon">💻</div><h3>অনলাইন পরিষেবা</h3><p>বিভিন্ন অনলাইন কাজ ও ডিজিটাল পরিষেবা।</p></div>
-<div class="card"><div class="icon">📄</div><h3>ডকুমেন্ট পরিষেবা</h3><p>ডকুমেন্ট তৈরি, প্রিন্ট ও অন্যান্য সহায়তা।</p></div>
-<div class="card"><div class="icon">🖨️</div><h3>প্রিন্টিং পরিষেবা</h3><p>প্রিন্ট, স্ক্যান ও অন্যান্য ডিজিটাল পরিষেবা।</p></div>
-<div class="card"><div class="icon">📱</div><h3>ডিজিটাল সহায়তা</h3><p>বিভিন্ন ডিজিটাল কাজে প্রয়োজনীয় সহায়তা।</p></div>
-</div>
-</section>
-<section class="section" id="about">
-<h2>আমাদের সম্পর্কে</h2>
-<div class="card">
-<h3>SRIJA COMMUNICATION</h3>
-<p style="line-height:1.8;margin-top:15px">SRIJA COMMUNICATION একটি স্থানীয় ডিজিটাল পরিষেবা কেন্দ্র। আমাদের লক্ষ্য হলো সাধারণ মানুষের বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবা সহজভাবে প্রদান করা।</p>
-</div>
-</section>
-<section class="contact" id="contact">
-<h2>যোগাযোগ করুন</h2>
-<p>👤 সন্তু প্রামানিক</p>
-<p>📞 7003979575</p>
-<p>📍 দক্ষিণ জালখুড়া, বড়ুয়া পাড়া, মহেশতলা, কলকাতা - 700141</p>
-</section>
+<header><h1 id="siteTitle">শ্রীজা কমিউনিকেশন</h1><p>SRIJA COMMUNICATION</p></header>
+<nav><a href="#home">হোম</a><a href="#services">পরিষেবা</a><a href="#about">আমাদের সম্পর্কে</a><a href="#contact">যোগাযোগ</a><a href="#admin">অ্যাডমিন</a></nav>
+<div class="notice"><span id="noticeText">SRIJA COMMUNICATION-এ আপনাকে স্বাগতম</span></div>
+
+<section class="hero" id="home"><h2 id="welcomeTitle">স্বাগতম SRIJA COMMUNICATION-এ</h2><p id="welcomeText">আপনার বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবার জন্য একটি সহজ এবং নির্ভরযোগ্য ঠিকানা।</p><a href="#services" class="btn">পরিষেবাগুলি দেখুন</a></section>
+
+<section class="section" id="services"><h2>আমাদের পরিষেবা</h2><div class="cards" id="serviceCards"></div></section>
+<section class="section" id="about"><h2>আমাদের সম্পর্কে</h2><div class="card"><h3>SRIJA COMMUNICATION</h3><p id="aboutText" style="line-height:1.8">SRIJA COMMUNICATION একটি স্থানীয় ডিজিটাল পরিষেবা কেন্দ্র। আমাদের লক্ষ্য হলো সাধারণ মানুষের বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবা সহজভাবে প্রদান করা।</p></div></section>
+<section class="contact" id="contact"><h2>যোগাযোগ করুন</h2><p>👤 <span id="contactName">সন্তু প্রামানিক</span></p><p>📞 <span id="contactPhone">7003979575</span></p><p>📍 <span id="contactAddress">দক্ষিণ জালখুড়া, বড়ুয়া পাড়া, মহেশতলা, কলকাতা - 700141</span></p></section>
+
+<section id="admin" class="admin-wrap">
+<div id="loginBox" class="panel"><h2>🔐 অ্যাডমিন লগইন</h2><p class="small">User ID: <b>admin</b></p><input id="loginUser" placeholder="User ID"><input id="loginPass" type="password" placeholder="Password"><button class="btn" onclick="login()">Login</button><p id="loginMsg" style="color:#b42318"></p></div>
+<div id="dashboard" style="display:none">
+<button class="btn logout" onclick="logout()">Logout</button><h2>⚙️ অ্যাডমিন ড্যাশবোর্ড</h2>
+<div class="panel"><h3>নোটিশ ও হোম পেজ</h3><label>Notice</label><input id="eNotice"><label>Welcome Title</label><input id="eWelcomeTitle"><label>Welcome Text</label><textarea id="eWelcomeText"></textarea><label>About</label><textarea id="eAbout"></textarea><button class="btn" onclick="saveGeneral()">Save</button></div>
+<div class="panel"><h3>যোগাযোগ</h3><div class="row"><input id="eName" placeholder="নাম"><input id="ePhone" placeholder="ফোন"></div><input id="eAddress" placeholder="ঠিকানা"><button class="btn" onclick="saveContact()">Save</button></div>
+<div class="panel"><h3>পরিষেবা / লিংক</h3><div id="editServices"></div><button class="btn" onclick="addService()">+ নতুন পরিষেবা</button> <button class="btn" onclick="saveServices()">Save Services</button></div>
+<div class="panel"><h3>সাইট ডেটা</h3><p class="small">এই সংস্করণে পরিবর্তনগুলি এই ব্রাউজারের LocalStorage-এ সংরক্ষিত থাকে। একই ফোন/ব্রাউজার থেকে পরে আবার এডিট করা যাবে।</p><button class="btn danger" onclick="resetData()">Reset Demo Data</button></div>
+</div></section>
 <footer>© 2026 SRIJA COMMUNICATION | All Rights Reserved</footer>
-</body>
-</html>
+
+<script>
+const KEY="srija_communication_v3";
+const defaults={notice:"SRIJA COMMUNICATION-এ আপনাকে স্বাগতম",welcomeTitle:"স্বাগতম SRIJA COMMUNICATION-এ",welcomeText:"আপনার বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবার জন্য একটি সহজ এবং নির্ভরযোগ্য ঠিকানা।",about:"SRIJA COMMUNICATION একটি স্থানীয় ডিজিটাল পরিষেবা কেন্দ্র। আমাদের লক্ষ্য হলো সাধারণ মানুষের বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবা সহজভাবে প্রদান করা।",name:"সন্তু প্রামানিক",phone:"7003979575",address:"দক্ষিণ জালখুড়া, বড়ুয়া পাড়া, মহেশতলা, কলকাতা - 700141",services:[["💻","অনলাইন পরিষেবা","বিভিন্ন অনলাইন কাজ ও ডিজিটাল পরিষেবা।"],["📄","ডকুমেন্ট পরিষেবা","ডকুমেন্ট তৈরি, প্রিন্ট ও অন্যান্য সহায়তা।"],["🖨️","প্রিন্টিং পরিষেবা","প্রিন্ট, স্ক্যান ও অন্যান্য ডিজিটাল পরিষেবা।"],["📱","ডিজিটাল সহায়তা","বিভিন্ন ডিজিটাল কাজে প্রয়োজনীয় সহায়তা।"]]};
+let data=JSON.parse(localStorage.getItem(KEY)||"null")||structuredClone(defaults);
+function render(){noticeText.textContent=data.notice;welcomeTitle.textContent=data.welcomeTitle;welcomeText.textContent=data.welcomeText;aboutText.textContent=data.about;contactName.textContent=data.name;contactPhone.textContent=data.phone;contactAddress.textContent=data.address;serviceCards.innerHTML=data.services.map(s=>'<div class="card"><div class="icon">'+esc(s[0])+'</div><h3>'+esc(s[1])+'</h3><p>'+esc(s[2])+'</p></div>').join('');}
+function esc(x){return String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render();}
+function login(){if(loginUser.value==="admin"&&loginPass.value==="1234"){loginBox.style.display="none";dashboard.style.display="block";loadEditor();}else loginMsg.textContent="ভুল User ID বা Password";}
+function logout(){dashboard.style.display="none";loginBox.style.display="block";loginPass.value="";}
+function loadEditor(){eNotice.value=data.notice;eWelcomeTitle.value=data.welcomeTitle;eWelcomeText.value=data.welcomeText;eAbout.value=data.about;eName.value=data.name;ePhone.value=data.phone;eAddress.value=data.address;renderServiceEditor();}
+function saveGeneral(){data.notice=eNotice.value;data.welcomeTitle=eWelcomeTitle.value;data.welcomeText=eWelcomeText.value;data.about=eAbout.value;save();alert("সংরক্ষণ হয়েছে");}
+function saveContact(){data.name=eName.value;data.phone=ePhone.value;data.address=eAddress.value;save();alert("সংরক্ষণ হয়েছে");}
+function renderServiceEditor(){editServices.innerHTML=data.services.map((s,i)=>'<div class="link-row"><input id="si'+i+'" value="'+esc(s[0])+'" placeholder="Icon"><input id="st'+i+'" value="'+esc(s[1])+'" placeholder="Title"><input id="sd'+i+'" value="'+esc(s[2])+'" placeholder="Description"><button class="btn danger" onclick="delService('+i+')">Delete</button></div>').join('');}
+function addService(){data.services.push(["🔗","নতুন পরিষেবা","বিবরণ লিখুন"]);renderServiceEditor();}
+function delService(i){data.services.splice(i,1);renderServiceEditor();}
+function saveServices(){data.services=data.services.map((s,i)=>[document.getElementById("si"+i).value,document.getElementById("st"+i).value,document.getElementById("sd"+i).value]);save();alert("পরিষেবাগুলি সংরক্ষণ হয়েছে");renderServiceEditor();}
+function resetData(){if(confirm("সব পরিবর্তন মুছে ডেমো ডেটা ফিরিয়ে আনবেন?")){data=structuredClone(defaults);save();loadEditor();}}
+render();
+</script>
+</body></html>
