@@ -18,7 +18,7 @@ nav a{color:#075e54;text-decoration:none;font-weight:bold;margin:0 10px}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}.card{background:#fff;padding:22px;border-radius:12px;text-align:center;box-shadow:0 3px 12px #00000012}.icon{font-size:38px}.card h3{color:#075e54}
 .contact{background:#075e54;color:white;text-align:center;padding:42px 20px}.contact p{margin:9px}
 footer{background:#063f39;color:#fff;text-align:center;padding:17px;font-size:14px}
-#admin{display:none}.admin-wrap{max-width:900px;margin:30px auto;padding:20px}.panel{background:#fff;padding:22px;border-radius:12px;box-shadow:0 3px 14px #0001;margin-bottom:18px}
+#admin{display:none}.custom-boxes{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;padding:14px 20px;background:#f4f7fb}.custom-box{background:#fff;border:1px solid #dbe3ea;border-radius:10px;padding:14px 18px;min-width:180px;text-align:center;box-shadow:0 2px 8px #00000010}.custom-box a{color:#075e54;text-decoration:none;font-weight:bold}.admin-wrap{max-width:900px;margin:30px auto;padding:20px}.panel{background:#fff;padding:22px;border-radius:12px;box-shadow:0 3px 14px #0001;margin-bottom:18px}
 input,textarea{width:100%;padding:11px;margin:7px 0 12px;border:1px solid #ccd5dd;border-radius:7px;font-size:15px}textarea{min-height:90px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.link-row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;margin-bottom:8px}
 .small{font-size:13px;color:#666}.danger{background:#b42318}.logout{float:right;background:#555}
@@ -29,6 +29,7 @@ input,textarea{width:100%;padding:11px;margin:7px 0 12px;border:1px solid #ccd5d
 <header><h1 id="siteTitle">শ্রীজা কমিউনিকেশন</h1><p>SRIJA COMMUNICATION</p></header>
 <nav><a href="#home">হোম</a><a href="#services">পরিষেবা</a><a href="#about">আমাদের সম্পর্কে</a><a href="#contact">যোগাযোগ</a><a href="#admin">অ্যাডমিন</a></nav>
 <div class="notice"><span id="noticeText">SRIJA COMMUNICATION-এ আপনাকে স্বাগতম</span></div>
+<div id="customBoxes" class="custom-boxes"></div>
 
 <section class="hero" id="home"><h2 id="welcomeTitle">স্বাগতম SRIJA COMMUNICATION-এ</h2><p id="welcomeText">আপনার বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবার জন্য একটি সহজ এবং নির্ভরযোগ্য ঠিকানা।</p><a href="#services" class="btn">পরিষেবাগুলি দেখুন</a></section>
 
@@ -43,26 +44,32 @@ input,textarea{width:100%;padding:11px;margin:7px 0 12px;border:1px solid #ccd5d
 <div class="panel"><h3>নোটিশ ও হোম পেজ</h3><label>Notice</label><input id="eNotice"><label>Welcome Title</label><input id="eWelcomeTitle"><label>Welcome Text</label><textarea id="eWelcomeText"></textarea><label>About</label><textarea id="eAbout"></textarea><button class="btn" onclick="saveGeneral()">Save</button></div>
 <div class="panel"><h3>যোগাযোগ</h3><div class="row"><input id="eName" placeholder="নাম"><input id="ePhone" placeholder="ফোন"></div><input id="eAddress" placeholder="ঠিকানা"><button class="btn" onclick="saveContact()">Save</button></div>
 <div class="panel"><h3>পরিষেবা / লিংক</h3><div id="editServices"></div><button class="btn" onclick="addService()">+ নতুন পরিষেবা</button> <button class="btn" onclick="saveServices()">Save Services</button></div>
+<div class="panel"><h3>📦 নিজের বক্স যোগ করুন</h3><p class="small">এখান থেকে যত খুশি বক্স যোগ করতে পারবেন। বক্সের লেখা এবং চাইলে লিংকও দিতে পারবেন।</p><div id="editBoxes"></div><button class="btn" onclick="addBox()">+ নতুন বক্স</button> <button class="btn" onclick="saveBoxes()">Save Boxes</button></div>
 <div class="panel"><h3>সাইট ডেটা</h3><p class="small">এই সংস্করণে পরিবর্তনগুলি এই ব্রাউজারের LocalStorage-এ সংরক্ষিত থাকে। একই ফোন/ব্রাউজার থেকে পরে আবার এডিট করা যাবে।</p><button class="btn danger" onclick="resetData()">Reset Demo Data</button></div>
 </div></section>
 <footer>© 2026 SRIJA COMMUNICATION | All Rights Reserved</footer>
 
 <script>
 const KEY="srija_communication_v3";
-const defaults={notice:"SRIJA COMMUNICATION-এ আপনাকে স্বাগতম",welcomeTitle:"স্বাগতম SRIJA COMMUNICATION-এ",welcomeText:"আপনার বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবার জন্য একটি সহজ এবং নির্ভরযোগ্য ঠিকানা।",about:"SRIJA COMMUNICATION একটি স্থানীয় ডিজিটাল পরিষেবা কেন্দ্র। আমাদের লক্ষ্য হলো সাধারণ মানুষের বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবা সহজভাবে প্রদান করা।",name:"সন্তু প্রামানিক",phone:"7003979575",address:"দক্ষিণ জালখুড়া, বড়ুয়া পাড়া, মহেশতলা, কলকাতা - 700141",services:[["💻","অনলাইন পরিষেবা","বিভিন্ন অনলাইন কাজ ও ডিজিটাল পরিষেবা।"],["📄","ডকুমেন্ট পরিষেবা","ডকুমেন্ট তৈরি, প্রিন্ট ও অন্যান্য সহায়তা।"],["🖨️","প্রিন্টিং পরিষেবা","প্রিন্ট, স্ক্যান ও অন্যান্য ডিজিটাল পরিষেবা।"],["📱","ডিজিটাল সহায়তা","বিভিন্ন ডিজিটাল কাজে প্রয়োজনীয় সহায়তা।"]]};
+const defaults={notice:"SRIJA COMMUNICATION-এ আপনাকে স্বাগতম",welcomeTitle:"স্বাগতম SRIJA COMMUNICATION-এ",welcomeText:"আপনার বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবার জন্য একটি সহজ এবং নির্ভরযোগ্য ঠিকানা।",about:"SRIJA COMMUNICATION একটি স্থানীয় ডিজিটাল পরিষেবা কেন্দ্র। আমাদের লক্ষ্য হলো সাধারণ মানুষের বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবা সহজভাবে প্রদান করা।",name:"সন্তু প্রামানিক",phone:"7003979575",address:"দক্ষিণ জালখুড়া, বড়ুয়া পাড়া, মহেশতলা, কলকাতা - 700141",services:[["💻","অনলাইন পরিষেবা","বিভিন্ন অনলাইন কাজ ও ডিজিটাল পরিষেবা।"],["📄","ডকুমেন্ট পরিষেবা","ডকুমেন্ট তৈরি, প্রিন্ট ও অন্যান্য সহায়তা।"],["🖨️","প্রিন্টিং পরিষেবা","প্রিন্ট, স্ক্যান ও অন্যান্য ডিজিটাল পরিষেবা।"],["📱","ডিজিটাল সহায়তা","বিভিন্ন ডিজিটাল কাজে প্রয়োজনীয় সহায়তা।"]],customBoxes:[]};
 let data=JSON.parse(localStorage.getItem(KEY)||"null")||structuredClone(defaults);
-function render(){noticeText.textContent=data.notice;welcomeTitle.textContent=data.welcomeTitle;welcomeText.textContent=data.welcomeText;aboutText.textContent=data.about;contactName.textContent=data.name;contactPhone.textContent=data.phone;contactAddress.textContent=data.address;serviceCards.innerHTML=data.services.map(s=>'<div class="card"><div class="icon">'+esc(s[0])+'</div><h3>'+esc(s[1])+'</h3><p>'+esc(s[2])+'</p></div>').join('');}
+function render(){noticeText.textContent=data.notice;renderCustomBoxes();welcomeTitle.textContent=data.welcomeTitle;welcomeText.textContent=data.welcomeText;aboutText.textContent=data.about;contactName.textContent=data.name;contactPhone.textContent=data.phone;contactAddress.textContent=data.address;serviceCards.innerHTML=data.services.map(s=>'<div class="card"><div class="icon">'+esc(s[0])+'</div><h3>'+esc(s[1])+'</h3><p>'+esc(s[2])+'</p></div>').join('');}
 function esc(x){return String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function save(){localStorage.setItem(KEY,JSON.stringify(data));render();}
 function login(){if(loginUser.value==="admin"&&loginPass.value==="1234"){loginBox.style.display="none";dashboard.style.display="block";loadEditor();}else loginMsg.textContent="ভুল User ID বা Password";}
 function logout(){dashboard.style.display="none";loginBox.style.display="block";loginPass.value="";}
-function loadEditor(){eNotice.value=data.notice;eWelcomeTitle.value=data.welcomeTitle;eWelcomeText.value=data.welcomeText;eAbout.value=data.about;eName.value=data.name;ePhone.value=data.phone;eAddress.value=data.address;renderServiceEditor();}
+function loadEditor(){eNotice.value=data.notice;renderBoxEditor();eWelcomeTitle.value=data.welcomeTitle;eWelcomeText.value=data.welcomeText;eAbout.value=data.about;eName.value=data.name;ePhone.value=data.phone;eAddress.value=data.address;renderServiceEditor();}
 function saveGeneral(){data.notice=eNotice.value;data.welcomeTitle=eWelcomeTitle.value;data.welcomeText=eWelcomeText.value;data.about=eAbout.value;save();alert("সংরক্ষণ হয়েছে");}
 function saveContact(){data.name=eName.value;data.phone=ePhone.value;data.address=eAddress.value;save();alert("সংরক্ষণ হয়েছে");}
 function renderServiceEditor(){editServices.innerHTML=data.services.map((s,i)=>'<div class="link-row"><input id="si'+i+'" value="'+esc(s[0])+'" placeholder="Icon"><input id="st'+i+'" value="'+esc(s[1])+'" placeholder="Title"><input id="sd'+i+'" value="'+esc(s[2])+'" placeholder="Description"><button class="btn danger" onclick="delService('+i+')">Delete</button></div>').join('');}
 function addService(){data.services.push(["🔗","নতুন পরিষেবা","বিবরণ লিখুন"]);renderServiceEditor();}
 function delService(i){data.services.splice(i,1);renderServiceEditor();}
 function saveServices(){data.services=data.services.map((s,i)=>[document.getElementById("si"+i).value,document.getElementById("st"+i).value,document.getElementById("sd"+i).value]);save();alert("পরিষেবাগুলি সংরক্ষণ হয়েছে");renderServiceEditor();}
+function renderBoxEditor(){editBoxes.innerHTML=data.customBoxes.map((b,i)=>'<div class="link-row"><input id="bi'+i+'" value="'+esc(b[0])+'" placeholder="বক্সের লেখা"><input id="bu'+i+'" value="'+esc(b[1])+'" placeholder="লিংক (ঐচ্ছিক)"><button class="btn danger" onclick="delBox('+i+')">Delete</button></div>').join('');}
+function renderCustomBoxes(){customBoxes.innerHTML=(data.customBoxes||[]).map(b=>b[1]?'<div class="custom-box"><a href="'+esc(b[1])+'" target="_blank" rel="noopener">'+esc(b[0])+'</a></div>':'<div class="custom-box">'+esc(b[0])+'</div>').join('');}
+function addBox(){data.customBoxes.push(["নতুন বক্স",""]);renderBoxEditor();}
+function delBox(i){data.customBoxes.splice(i,1);renderBoxEditor();renderCustomBoxes();}
+function saveBoxes(){data.customBoxes=data.customBoxes.map((b,i)=>[document.getElementById("bi"+i).value,document.getElementById("bu"+i).value]);save();alert("বক্সগুলি সংরক্ষণ হয়েছে");renderBoxEditor();}
 function resetData(){if(confirm("সব পরিবর্তন মুছে ডেমো ডেটা ফিরিয়ে আনবেন?")){data=structuredClone(defaults);save();loadEditor();}}
 render();
 </script>
