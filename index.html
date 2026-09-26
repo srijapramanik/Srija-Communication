@@ -55,7 +55,7 @@ input,textarea{width:100%;padding:11px;margin:7px 0 12px;border:1px solid #ccd5d
 <option value="contactAddress">যোগাযোগ — ঠিকানা</option><option value="servicesButton">পরিষেবা বাটন</option><option value="officialLinksButton">Official links বাটন</option>
 </select></div>
 <div><label>ফন্ট সাইজ (px)</label><input id="styleSize" type="number" min="8" max="100" value="16"></div>
-<div><label>ফন্ট রং</label><input id="styleColor" type="color" value="#222222"></div>
+<div><label>ফন্ট রং</label><input id="styleColor" type="color" value="#222222"></div><div><label>ব্যাকগ্রাউন্ড রং</label><input id="styleBg" type="color" value="#ffffff"></div>
 <div><label>ফন্ট</label><select id="styleFont"><option value="Arial">Arial</option><option value="Noto Sans Bengali">Noto Sans Bengali</option><option value="Poppins">Poppins</option><option value="Georgia">Georgia</option><option value="Verdana">Verdana</option></select></div>
 <div><label>স্টাইল</label><select id="styleWeight"><option value="normal">সাধারণ</option><option value="bold">বোল্ড</option></select></div>
 <div><label>অক্ষরের ধরন</label><select id="styleItalic"><option value="normal">সোজা</option><option value="italic">ইটালিক</option></select></div>
@@ -88,6 +88,7 @@ el.style.color=s.color||"";
 el.style.fontFamily=s.fontFamily||"";
 el.style.fontWeight=s.fontWeight||"normal";
 el.style.fontStyle=s.fontStyle||"normal";
+el.style.backgroundColor=s.background||"";
 });
 }
 function loadSelectedStyle(){
@@ -97,10 +98,11 @@ styleColor.value=(s.color&&/^#[0-9a-f]{6}$/i.test(s.color))?s.color:"#222222";
 styleFont.value=s.fontFamily||"Arial";
 styleWeight.value=s.fontWeight||"normal";
 styleItalic.value=s.fontStyle||"normal";
+styleBg.value=(s.background&&/^#[0-9a-f]{6}$/i.test(s.background))?s.background:"#ffffff";
 }
 function applySelectedStyle(){
 const id=styleTarget.value;
-data.styles[id]={fontSize:Math.max(8,Math.min(100,Number(styleSize.value)||16))+"px",color:styleColor.value,fontFamily:styleFont.value,fontWeight:styleWeight.value,fontStyle:styleItalic.value};
+data.styles[id]={fontSize:Math.max(8,Math.min(100,Number(styleSize.value)||16))+"px",color:styleColor.value,fontFamily:styleFont.value,fontWeight:styleWeight.value,fontStyle:styleItalic.value,background:styleBg.value};
 save();loadSelectedStyle();alert("নির্বাচিত উপাদানের ডিজাইন সংরক্ষণ হয়েছে");
 }
 function resetSelectedStyle(){
