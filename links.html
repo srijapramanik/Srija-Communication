@@ -14,6 +14,7 @@ h2{text-align:center;color:#075e54;margin:10px 0 28px}
 .link-card{background:#fff;border-radius:14px;padding:18px;text-align:center;box-shadow:0 3px 12px #00000012;border:1px solid #e3e9ee}
 .link-card img{width:78px;height:78px;object-fit:contain;border-radius:12px;margin-bottom:10px}
 .link-card h3{margin:8px 0 14px;color:#075e54}.open{display:inline-block;padding:10px 18px;background:#075e54;color:#fff;text-decoration:none;border-radius:8px;font-weight:bold}
+.empty{text-align:center;background:#fff;border:1px dashed #b8c6cf;border-radius:14px;padding:30px;color:#667}
 footer{background:#063f39;color:#fff;text-align:center;padding:17px;margin-top:30px}
 </style>
 </head>
@@ -22,10 +23,36 @@ footer{background:#063f39;color:#fff;text-align:center;padding:17px;margin-top:3
 <div class="wrap">
 <a class="back" href="index.html">← প্রথম পেজে ফিরে যান</a>
 <h2>🌐 Official links</h2>
-<div class="links">
-<div class="link-card"><div style="font-size:64px">🌐</div><h3>নতুন ওয়েবসাইট</h3><a class="open" href="#" onclick="return false">লিংক যোগ হবে</a></div>
-</div>
+<div id="links" class="links"></div>
 </div>
 <footer>© 2026 SRIJA COMMUNICATION</footer>
+<script>
+const LINK_KEY="srija_communication_link_page_v1";
+function renderLinks(){
+  const box=document.getElementById("links");
+  let data=[];
+  try{data=JSON.parse(localStorage.getItem(LINK_KEY)||"[]")}catch(e){data=[]}
+  box.innerHTML="";
+  if(!Array.isArray(data)||data.length===0){
+    box.innerHTML='<div class="empty">এখনও কোনো ওয়েবসাইট লিঙ্ক যোগ করা হয়নি।</div>';
+    return;
+  }
+  data.forEach(item=>{
+    const card=document.createElement("div");
+    card.className="link-card";
+    const safeUrl=typeof item.url==="string"&&/^https?:\\/\\//i.test(item.url)?item.url:"#";
+    card.innerHTML='<div style="font-size:64px">🌐</div><h3></h3><a class="open" target="_blank" rel="noopener noreferrer">ওয়েবসাইট খুলুন</a>';
+    card.querySelector("h3").textContent=item.name||"ওয়েবসাইট";
+    if(item.image){
+      const img=document.createElement("img");
+      img.src=item.image; img.alt=item.name||"ওয়েবসাইট";
+      card.querySelector("div").replaceWith(img);
+    }
+    const a=card.querySelector("a"); a.href=safeUrl;
+    box.appendChild(card);
+  });
+}
+renderLinks();
+</script>
 </body>
 </html>
