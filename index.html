@@ -21,7 +21,7 @@ footer{background:#063f39;color:#fff;text-align:center;padding:17px;font-size:14
 #admin{display:none}.custom-boxes{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;padding:14px 20px;background:#f4f7fb}.custom-box{background:#fff;border:1px solid #dbe3ea;border-radius:10px;padding:14px 18px;min-width:180px;text-align:center;box-shadow:0 2px 8px #00000010}.custom-box a{color:#075e54;text-decoration:none;font-weight:bold}.admin-wrap{max-width:900px;margin:30px auto;padding:20px}.panel{background:#fff;padding:22px;border-radius:12px;box-shadow:0 3px 14px #0001;margin-bottom:18px}
 input,textarea{width:100%;padding:11px;margin:7px 0 12px;border:1px solid #ccd5dd;border-radius:7px;font-size:15px}textarea{min-height:90px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.link-row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center;margin-bottom:8px}
-.small{font-size:13px;color:#666}.danger{background:#b42318}.logout{float:right;background:#555}
+.small{font-size:13px;color:#666}.style-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.style-grid label{font-size:13px;font-weight:bold}.style-grid select,.style-grid input[type="color"],.style-grid input[type="number"]{width:100%;padding:10px;margin:5px 0 10px;border:1px solid #ccd5dd;border-radius:7px;background:#fff}.style-actions{display:flex;flex-wrap:wrap;gap:8px}.style-actions .btn{margin-top:0}@media(max-width:650px){.style-grid{grid-template-columns:1fr}}.danger{background:#b42318}.logout{float:right;background:#555}
 @media(max-width:650px){nav a{margin:0 5px;font-size:14px}.row,.link-row{grid-template-columns:1fr}.hero h2{font-size:25px}}
 </style>
 </head>
@@ -41,6 +41,26 @@ input,textarea{width:100%;padding:11px;margin:7px 0 12px;border:1px solid #ccd5d
 <div id="loginBox" class="panel"><h2>🔐 অ্যাডমিন লগইন</h2><p class="small">User ID: <b>admin</b></p><input id="loginUser" placeholder="User ID"><input id="loginPass" type="password" placeholder="Password"><button class="btn" onclick="login()">Login</button><p id="loginMsg" style="color:#b42318"></p></div>
 <div id="dashboard" style="display:none">
 <button class="btn logout" onclick="logout()">Logout</button><h2>⚙️ অ্যাডমিন ড্যাশবোর্ড</h2>
+<div class="panel"><h3>🎨 নির্বাচিত উপাদানের ডিজাইন</h3>
+<p class="small">তালিকা থেকে একটি নির্দিষ্ট লেখা নির্বাচন করে শুধু সেই উপাদানের ফন্ট সাইজ, রং ও স্টাইল বদলান।</p>
+<div class="style-grid">
+<div><label>উপাদান নির্বাচন</label><select id="styleTarget" onchange="loadSelectedStyle()">
+<option value="siteTitle">শ্রীজা কমিউনিকেশন — শিরোনাম</option>
+<option value="welcomeTitle">স্বাগতম — শিরোনাম</option>
+<option value="welcomeText">স্বাগতম — বিবরণ</option>
+<option value="noticeText">নোটিশ/স্ক্রলিং লেখা</option>
+<option value="aboutText">আমাদের সম্পর্কে — লেখা</option>
+<option value="contactName">যোগাযোগ — নাম</option>
+<option value="contactPhone">যোগাযোগ — ফোন</option>
+<option value="contactAddress">যোগাযোগ — ঠিকানা</option>
+</select></div>
+<div><label>ফন্ট সাইজ (px)</label><input id="styleSize" type="number" min="8" max="100" value="16"></div>
+<div><label>ফন্ট রং</label><input id="styleColor" type="color" value="#222222"></div>
+<div><label>ফন্ট</label><select id="styleFont"><option value="Arial">Arial</option><option value="Noto Sans Bengali">Noto Sans Bengali</option><option value="Poppins">Poppins</option><option value="Georgia">Georgia</option><option value="Verdana">Verdana</option></select></div>
+<div><label>স্টাইল</label><select id="styleWeight"><option value="normal">সাধারণ</option><option value="bold">বোল্ড</option></select></div>
+<div><label>অক্ষরের ধরন</label><select id="styleItalic"><option value="normal">সোজা</option><option value="italic">ইটালিক</option></select></div>
+</div>
+<div class="style-actions"><button class="btn" onclick="applySelectedStyle()">প্রয়োগ করুন</button><button class="btn" onclick="resetSelectedStyle()">ডিফল্টে ফেরত</button></div></div>
 <div class="panel"><h3>নোটিশ ও হোম পেজ</h3><label>Notice</label><input id="eNotice"><label>Welcome Title</label><input id="eWelcomeTitle"><label>Welcome Text</label><textarea id="eWelcomeText"></textarea><label>About</label><textarea id="eAbout"></textarea><button class="btn" onclick="saveGeneral()">Save</button></div>
 <div class="panel"><h3>যোগাযোগ</h3><div class="row"><input id="eName" placeholder="নাম"><input id="ePhone" placeholder="ফোন"></div><input id="eAddress" placeholder="ঠিকানা"><button class="btn" onclick="saveContact()">Save</button></div>
 <div class="panel"><h3>পরিষেবা / লিংক</h3><div id="editServices"></div><button class="btn" onclick="addService()">+ নতুন পরিষেবা</button> <button class="btn" onclick="saveServices()">Save Services</button></div>
@@ -51,14 +71,43 @@ input,textarea{width:100%;padding:11px;margin:7px 0 12px;border:1px solid #ccd5d
 
 <script>
 const KEY="srija_communication_v3";
-const defaults={notice:"SRIJA COMMUNICATION-এ আপনাকে স্বাগতম",welcomeTitle:"স্বাগতম SRIJA COMMUNICATION-এ",welcomeText:"আপনার বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবার জন্য একটি সহজ এবং নির্ভরযোগ্য ঠিকানা।",about:"SRIJA COMMUNICATION একটি স্থানীয় ডিজিটাল পরিষেবা কেন্দ্র। আমাদের লক্ষ্য হলো সাধারণ মানুষের বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবা সহজভাবে প্রদান করা।",name:"সন্তু প্রামানিক",phone:"7003979575",address:"দক্ষিণ জালখুড়া, বড়ুয়া পাড়া, মহেশতলা, কলকাতা - 700141",services:[["💻","অনলাইন পরিষেবা","বিভিন্ন অনলাইন কাজ ও ডিজিটাল পরিষেবা।"],["📄","ডকুমেন্ট পরিষেবা","ডকুমেন্ট তৈরি, প্রিন্ট ও অন্যান্য সহায়তা।"],["🖨️","প্রিন্টিং পরিষেবা","প্রিন্ট, স্ক্যান ও অন্যান্য ডিজিটাল পরিষেবা।"],["📱","ডিজিটাল সহায়তা","বিভিন্ন ডিজিটাল কাজে প্রয়োজনীয় সহায়তা।"]],customBoxes:[]};
+const defaults={styles:{},notice:"SRIJA COMMUNICATION-এ আপনাকে স্বাগতম",welcomeTitle:"স্বাগতম SRIJA COMMUNICATION-এ",welcomeText:"আপনার বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবার জন্য একটি সহজ এবং নির্ভরযোগ্য ঠিকানা।",about:"SRIJA COMMUNICATION একটি স্থানীয় ডিজিটাল পরিষেবা কেন্দ্র। আমাদের লক্ষ্য হলো সাধারণ মানুষের বিভিন্ন অনলাইন ও ডিজিটাল পরিষেবা সহজভাবে প্রদান করা।",name:"সন্তু প্রামানিক",phone:"7003979575",address:"দক্ষিণ জালখুড়া, বড়ুয়া পাড়া, মহেশতলা, কলকাতা - 700141",services:[["💻","অনলাইন পরিষেবা","বিভিন্ন অনলাইন কাজ ও ডিজিটাল পরিষেবা।"],["📄","ডকুমেন্ট পরিষেবা","ডকুমেন্ট তৈরি, প্রিন্ট ও অন্যান্য সহায়তা।"],["🖨️","প্রিন্টিং পরিষেবা","প্রিন্ট, স্ক্যান ও অন্যান্য ডিজিটাল পরিষেবা।"],["📱","ডিজিটাল সহায়তা","বিভিন্ন ডিজিটাল কাজে প্রয়োজনীয় সহায়তা।"]],customBoxes:[]};
 let data=JSON.parse(localStorage.getItem(KEY)||"null")||structuredClone(defaults);
+data.styles=data.styles||{};
+const styleDefaults={fontSize:"",color:"",fontFamily:"",fontWeight:"normal",fontStyle:"normal"};
+function applySavedStyles(){
+Object.keys(data.styles||{}).forEach(id=>{
+const el=document.getElementById(id),s=data.styles[id];
+if(!el||!s)return;
+el.style.fontSize=s.fontSize||"";
+el.style.color=s.color||"";
+el.style.fontFamily=s.fontFamily||"";
+el.style.fontWeight=s.fontWeight||"normal";
+el.style.fontStyle=s.fontStyle||"normal";
+});
+}
+function loadSelectedStyle(){
+const id=styleTarget.value,s=Object.assign({},styleDefaults,data.styles[id]||{}),el=document.getElementById(id);
+styleSize.value=s.fontSize?parseInt(s.fontSize,10):parseInt(getComputedStyle(el).fontSize,10);
+styleColor.value=(s.color&&/^#[0-9a-f]{6}$/i.test(s.color))?s.color:"#222222";
+styleFont.value=s.fontFamily||"Arial";
+styleWeight.value=s.fontWeight||"normal";
+styleItalic.value=s.fontStyle||"normal";
+}
+function applySelectedStyle(){
+const id=styleTarget.value;
+data.styles[id]={fontSize:Math.max(8,Math.min(100,Number(styleSize.value)||16))+"px",color:styleColor.value,fontFamily:styleFont.value,fontWeight:styleWeight.value,fontStyle:styleItalic.value};
+save();loadSelectedStyle();alert("নির্বাচিত উপাদানের ডিজাইন সংরক্ষণ হয়েছে");
+}
+function resetSelectedStyle(){
+const id=styleTarget.value;delete data.styles[id];save();loadSelectedStyle();alert("নির্বাচিত উপাদান ডিফল্টে ফিরেছে");
+}
 function render(){noticeText.textContent=data.notice;renderCustomBoxes();welcomeTitle.textContent=data.welcomeTitle;welcomeText.textContent=data.welcomeText;aboutText.textContent=data.about;contactName.textContent=data.name;contactPhone.textContent=data.phone;contactAddress.textContent=data.address;serviceCards.innerHTML=data.services.map(s=>'<div class="card"><div class="icon">'+esc(s[0])+'</div><h3>'+esc(s[1])+'</h3><p>'+esc(s[2])+'</p></div>').join('');}
 function esc(x){return String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function save(){localStorage.setItem(KEY,JSON.stringify(data));render();}
+function save(){localStorage.setItem(KEY,JSON.stringify(data));render();applySavedStyles();}
 function login(){if(loginUser.value==="admin"&&loginPass.value==="1234"){loginBox.style.display="none";dashboard.style.display="block";loadEditor();}else loginMsg.textContent="ভুল User ID বা Password";}
 function logout(){dashboard.style.display="none";loginBox.style.display="block";loginPass.value="";}
-function loadEditor(){eNotice.value=data.notice;renderBoxEditor();eWelcomeTitle.value=data.welcomeTitle;eWelcomeText.value=data.welcomeText;eAbout.value=data.about;eName.value=data.name;ePhone.value=data.phone;eAddress.value=data.address;renderServiceEditor();}
+function loadEditor(){eNotice.value=data.notice;loadSelectedStyle();renderBoxEditor();eWelcomeTitle.value=data.welcomeTitle;eWelcomeText.value=data.welcomeText;eAbout.value=data.about;eName.value=data.name;ePhone.value=data.phone;eAddress.value=data.address;renderServiceEditor();}
 function saveGeneral(){data.notice=eNotice.value;data.welcomeTitle=eWelcomeTitle.value;data.welcomeText=eWelcomeText.value;data.about=eAbout.value;save();alert("সংরক্ষণ হয়েছে");}
 function saveContact(){data.name=eName.value;data.phone=ePhone.value;data.address=eAddress.value;save();alert("সংরক্ষণ হয়েছে");}
 function renderServiceEditor(){editServices.innerHTML=data.services.map((s,i)=>'<div class="link-row"><input id="si'+i+'" value="'+esc(s[0])+'" placeholder="Icon"><input id="st'+i+'" value="'+esc(s[1])+'" placeholder="Title"><input id="sd'+i+'" value="'+esc(s[2])+'" placeholder="Description"><button class="btn danger" onclick="delService('+i+')">Delete</button></div>').join('');}
