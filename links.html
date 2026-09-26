@@ -44,7 +44,7 @@ function renderLinks(){
     card.className="link-card";
     const st=item.style||{}; const fs=st.fontSize; card.style.fontSize=(typeof fs==="number"?fs+"px":(/^[0-9]+$/.test(String(fs||""))?String(fs)+"px":String(fs||""))); card.style.color=st.color||""; card.style.background=st.background||""; card.style.fontFamily=st.fontFamily||""; card.style.fontWeight=st.fontWeight||"normal"; card.style.fontStyle=st.fontStyle||"normal";
     const safeUrl=typeof item.url==="string"&&/^https?:\\/\\//i.test(item.url)?item.url:"#";
-    card.innerHTML='<div class="no-image">🌐</div><h3></h3><a class="open" target="_blank" rel="noopener noreferrer">ওয়েবসাইট খুলুন</a>';
+    card.innerHTML='<div class="no-image">🌐</div><h3></h3><a class="open" rel="noopener noreferrer">ওয়েবসাইট খুলুন</a>';
     card.querySelector("h3").textContent=item.name||"ওয়েবসাইট";
     if(item.image){
       const img=document.createElement("img");
