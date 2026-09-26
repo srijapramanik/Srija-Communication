@@ -88,7 +88,7 @@ el.style.color=s.color||"";
 el.style.fontFamily=s.fontFamily||"";
 el.style.fontWeight=s.fontWeight||"normal";
 el.style.fontStyle=s.fontStyle||"normal";
-el.style.backgroundColor=s.background||"";
+el.style.backgroundColor=(id==="noticeText" && (s.background||"").toLowerCase()==="#ffffff")?"":(s.background||"");
 });
 }
 function loadSelectedStyle(){
