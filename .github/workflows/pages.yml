@@ -31,6 +31,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
+          # GitHub Pages deploys the repository root as-is
 
       - name: Deploy to GitHub Pages
         id: deployment
