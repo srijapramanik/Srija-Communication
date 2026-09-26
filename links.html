@@ -19,7 +19,7 @@ footer{background:#063f39;color:#fff;text-align:center;padding:17px;margin-top:3
 </style>
 </head>
 <body>
-<header><h1>শ্রীজা কমিউনিকেশন</h1><p>প্রয়োজনীয় ওয়েবসাইট</p></header>
+<header><h1>শ্রীজা কমিউনিকেশন</h1><p id="linkPageTitle">প্রয়োজনীয় ওয়েবসাইট</p></header>
 <div class="wrap">
 <a class="back" href="index.html">← প্রথম পেজে ফিরে যান</a>
 <h2 id="linkHeading">🌐 Official links</h2>
@@ -27,7 +27,9 @@ footer{background:#063f39;color:#fff;text-align:center;padding:17px;margin-top:3
 </div>
 <footer>© 2026 SRIJA COMMUNICATION</footer>
 <script>
-const LINK_KEY="srija_communication_link_page_v1";\nconst LINK_SETTINGS_KEY="srija_communication_link_page_settings_v1";\nfunction applyLinkSettings(){let s={};try{s=JSON.parse(localStorage.getItem(LINK_SETTINGS_KEY)||"{}")}catch(e){};const h=document.getElementById("linkHeading");h.textContent=s.title||"🌐 Official links";h.classList.toggle("scroll",s.scroll!==false);}
+const LINK_KEY="srija_communication_link_page_v1";
+const LINK_SETTINGS_KEY="srija_communication_link_page_settings_v1";
+function applyLinkSettings(){let s={title:"প্রয়োজনীয় ওয়েবসাইট",scroll:true};try{s={...s,...JSON.parse(localStorage.getItem(LINK_SETTINGS_KEY)||"{}")}}catch(e){};const t=document.getElementById("linkPageTitle");const h=document.getElementById("linkHeading");if(t){t.textContent=s.title||"প্রয়োজনীয় ওয়েবসাইট";t.classList.toggle("scroll",s.scroll!==false)}if(h)h.classList.toggle("scroll",s.scroll!==false);}
 function renderLinks(){
   const box=document.getElementById("links");
   let data=[];
@@ -53,7 +55,8 @@ function renderLinks(){
     box.appendChild(card);
   });
 }
-applyLinkSettings();\nrenderLinks();
+applyLinkSettings();
+renderLinks();
 </script>
 </body>
 </html>
