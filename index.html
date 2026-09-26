@@ -27,7 +27,7 @@ input,textarea{width:100%;padding:11px;margin:7px 0 12px;border:1px solid #ccd5d
 </head>
 <body>
 <header><h1 id="siteTitle">শ্রীজা কমিউনিকেশন</h1><p>SRIJA COMMUNICATION</p></header>
-<nav><a id="navHome" href="#home">হোম</a><a id="navServices" href="#services">পরিষেবা</a><a id="navAbout" href="#about">আমাদের সম্পর্কে</a><a id="navContact" href="#contact">যোগাযোগ</a><a id="navAdmin" href="#admin">⚙️ সেটিংস</a></nav>
+<nav><a id="navHome" href="#home">হোম</a><a id="navServices" href="#services">পরিষেবা</a><a id="navAbout" href="#about">আমাদের সম্পর্কে</a><a id="navContact" href="#contact">যোগাযোগ</a><a id="navAdmin" href="#admin" onclick="openAdmin(event)">⚙️ সেটিংস</a></nav>
 <div class="notice"><span id="noticeText">SRIJA COMMUNICATION-এ আপনাকে স্বাগতম</span></div>
 <div id="customBoxes" class="custom-boxes"></div>
 
@@ -108,7 +108,7 @@ save();loadSelectedStyle();alert("নির্বাচিত উপাদান
 function resetSelectedStyle(){
 const id=styleTarget.value;delete data.styles[id];save();loadSelectedStyle();alert("নির্বাচিত উপাদান ডিফল্টে ফিরেছে");
 }
-function render(){noticeText.textContent=data.notice;renderCustomBoxes();welcomeTitle.textContent=data.welcomeTitle;welcomeText.textContent=data.welcomeText;aboutText.textContent=data.about;contactName.textContent=data.name;contactPhone.textContent=data.phone;contactAddress.textContent=data.address;servicesButton.textContent=data.servicesButtonText||"পরিষেবাগুলি দেখুন";officialLinksButton.textContent=data.officialLinksButtonText||"🌐 Official links";navHome.textContent=data.navHomeText||"হোম";navServices.textContent=data.navServicesText||"পরিষেবা";navAbout.textContent=data.navAboutText||"আমাদের সম্পর্কে";navContact.textContent=data.navContactText||"যোগাযোগ";navAdmin.textContent=data.navAdminText||"⚙️ সেটিংস";serviceCards.innerHTML=data.services.map(s=>'<div class="card"><div class="icon">'+esc(s[0])+'</div><h3>'+esc(s[1])+'</h3><p>'+esc(s[2])+'</p></div>').join('');}
+function openAdmin(e){if(e)e.preventDefault();const a=document.getElementById("admin");if(a){a.style.display="block";a.scrollIntoView({behavior:"smooth",block:"start"});}}\nfunction render(){noticeText.textContent=data.notice;renderCustomBoxes();welcomeTitle.textContent=data.welcomeTitle;welcomeText.textContent=data.welcomeText;aboutText.textContent=data.about;contactName.textContent=data.name;contactPhone.textContent=data.phone;contactAddress.textContent=data.address;servicesButton.textContent=data.servicesButtonText||"পরিষেবাগুলি দেখুন";officialLinksButton.textContent=data.officialLinksButtonText||"🌐 Official links";navHome.textContent=data.navHomeText||"হোম";navServices.textContent=data.navServicesText||"পরিষেবা";navAbout.textContent=data.navAboutText||"আমাদের সম্পর্কে";navContact.textContent=data.navContactText||"যোগাযোগ";navAdmin.textContent=data.navAdminText||"⚙️ সেটিংস";serviceCards.innerHTML=data.services.map(s=>'<div class="card"><div class="icon">'+esc(s[0])+'</div><h3>'+esc(s[1])+'</h3><p>'+esc(s[2])+'</p></div>').join('');}
 function esc(x){return String(x).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function save(){localStorage.setItem(KEY,JSON.stringify(data));render();applySavedStyles();}
 function login(){if(loginUser.value==="admin"&&loginPass.value==="1234"){loginBox.style.display="none";dashboard.style.display="block";loadEditor();}else loginMsg.textContent="ভুল User ID বা Password";}
